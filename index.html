@@ -11,8 +11,8 @@ function go(n,event){S.step=n;if(event)track(event);show()}
 function choices(arr,fn){return arr.map(x=>'<button class="choice" onclick="'+fn(x)+'">'+x[1]+'</button>').join("")}
 function included(){
  const std=["Kitchen counters & sink","Exterior of appliances","Bathrooms cleaned & sanitized","Toilets, showers & tubs","Accessible surfaces dusted","Vacuum carpets","Sweep & mop floors","Trash emptied"];
- const deep=["Everything in Standard","Baseboards","Doors & door frames","Window sills","Detailed bathroom buildup","Detailed kitchen surfaces","Extra attention to buildup"];
- const move=["Everything in Deep Cleaning","Inside empty cabinets & drawers","Inside closets","Detailed move-in / move-out reset"];
+ const deep=[...std,"Baseboards","Doors & door frames","Window sills","Detailed bathroom buildup","Detailed kitchen surfaces","Extra attention to buildup"];
+ const move=[...std,"Baseboards","Doors & door frames","Window sills","Detailed bathroom buildup","Detailed kitchen surfaces","Extra attention to buildup","Inside empty cabinets & drawers","Inside closets","Detailed move-in / move-out reset"];
  let a=S.clean==="standard"?std:S.clean==="deep"?deep:move;
  return '<div class="included"><b>✓ What’s included</b>'+a.map(x=>'<span class="check">✓ '+x+'</span>').join("")+'</div>';
 }
