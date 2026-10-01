@@ -7,7 +7,7 @@ export default async function h(req,res){
    service_type:b.type,name:b.name,phone:b.phone,email:b.email||null,address:b.address,
    bedrooms:b.beds||null,bathrooms:b.baths||null,sq_ft:b.type==="home"?(b.size||null):(b.officeSize||null),
    cleaning_type:b.clean||null,frequency:b.type==="home"?b.freq:b.officeFreq,quoted_price:b.price,status:"new",
-   condition_level:b.type==="home"?b.condition:null,addons:b.type==="home"?(b.addons||[]):[],
+   condition_level:b.type==="home"?b.condition:null,addons:b.type==="home"?(b.addons||[]).map(function(id){return id==="cabinets"&&b.cabinetSize?"cabinets_"+b.cabinetSize:id}):[],
    facility_type:b.type==="office"?b.facility:null,restrooms:b.type==="office"?b.restrooms:null,occupants:b.type==="office"?b.occupants:null
   })});
   if(!r.ok)throw Error(await r.text());return res.status(200).json({ok:true})
