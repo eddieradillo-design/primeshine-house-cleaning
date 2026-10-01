@@ -1,7 +1,7 @@
 const U=process.env.SUPABASE_URL,K=process.env.SUPABASE_SECRET_KEY;
 export default async function h(req,res){
  if(req.method!=="POST")return res.status(405).end();
- try{
+ try{if(!U||!K)return res.status(500).json({error:"server configuration missing",missing_url:!U,missing_key:!K});
   const b=req.body||{};
   const r=await fetch(U+"/rest/v1/cleaning_leads",{method:"POST",headers:{apikey:K,Authorization:"Bearer "+K,"Content-Type":"application/json",Prefer:"return=representation"},body:JSON.stringify({
    service_type:b.type,name:b.name,phone:b.phone,email:b.email||null,address:b.address,
