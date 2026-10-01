@@ -5,7 +5,7 @@
 <script>
 const S={step:0,type:"",beds:0,baths:0,size:0,clean:"standard",freq:"once",condition:"normal",addons:[],officeSize:0,officeFreq:"weekly",facility:"office",restrooms:1,occupants:10,price:0,low:0,high:0,address:""};
 const el=document.getElementById("screen"),bar=document.getElementById("bar");
-const homeAddons=[["fridge","Inside refrigerator",50],["oven","Inside oven",55],["cabinets","Inside kitchen cabinets",65],["windows","Interior windows",7],["blinds","Blinds / shutters",10],["pet","Heavy pet hair",35]]; S.windowQty=0; S.blindQty=0;
+const homeAddons=[["fridge","Inside refrigerator",50],["oven","Inside oven",55],["cabinets","Inside kitchen cabinets — small kitchen",45],["cabinetsMedium","Inside kitchen cabinets — medium kitchen",70],["cabinetsLarge","Inside kitchen cabinets — large kitchen",100],["windows","Interior windows",7],["blinds","Blinds / shutters",10],["pet","Heavy pet hair",35]]; S.windowQty=0; S.blindQty=0;
 function track(event){fetch("/api/track",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({event,session_id:sessionStorage.psid||(sessionStorage.psid=crypto.randomUUID()),service_type:S.type,step:S.step})}).catch(()=>{})}
 function go(n,event){S.step=n;if(event)track(event);show()}
 function choices(arr,fn){return arr.map(x=>'<button class="choice" onclick="'+fn(x)+'">'+x[1]+'</button>').join("")}
