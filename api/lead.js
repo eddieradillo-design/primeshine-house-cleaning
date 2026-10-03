@@ -14,7 +14,7 @@ export default async function h(req,res){
   const payload={
    service_type:b.type,name:b.name,phone:b.phone,email:b.email||null,address:b.address,
    bedrooms:b.beds||null,bathrooms:b.baths||null,sq_ft:b.type==="home"?(b.size||null):(b.officeSize||null),
-   cleaning_type:b.clean||null,frequency:b.type==="home"?b.freq:b.officeFreq,quoted_price:b.price,status:b.type==="home"?"booked":"new",
+   cleaning_type:b.clean||null,frequency:b.type==="home"?b.freq:b.officeFreq,quoted_price:b.price,recurring_price:b.type==="home"&&b.freq!=="once"?Math.round(Number(b.price)*(1-({monthly:.10,biweekly:.15,weekly:.20}[b.freq]||0))):null,status:b.type==="home"?"booked":"new",
    condition_level:b.type==="home"?b.condition:null,addons:b.type==="home"?(b.addons||[]).map(id=>id==="cabinets"&&b.cabinetSize?"cabinets_"+b.cabinetSize:id):[],
    facility_type:b.type==="office"?b.facility:null,restrooms:b.type==="office"?b.restrooms:null,occupants:b.type==="office"?b.occupants:null,
    appointment_date:b.type==="home"?b.appointmentDate:null,appointment_time:b.type==="home"?b.appointmentTime:null
